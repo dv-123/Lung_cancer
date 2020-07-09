@@ -17,11 +17,11 @@ Visualization of dataset is an important part of training , it gives better unde
 
 After combining all images in a single subdirectory according to their image it represents a 3d image. 3d image of lungs gives a vast idea about lung cancer cells  and other diseases in lungs . 
 
-(figure_2)
+![](Images/2.PNG)
 
 Metadata stored in CT scan images can be extracted from images with help of pydicom library. Information stored in one image is shown in the below figure.
 
-(figure_3)
+![](Images/3.PNG)
 
 # WATERSHED ALGORITHM
 
@@ -30,11 +30,11 @@ a watershed is a transformation defined on a grayscale image. The name refers me
 Starting from user-defined markers, the watershed algorithm treats pixels values as a local topography (elevation). The algorithm floods basins from the markers until basins attributed to different markers meet on watershed lines. In many cases, markers are chosen as local minima of the image, from which basins are flooded.
 First , we extract internal and external markers from CT scan images with the help of binary dilations and add them with a complete dark image using watershed methods. And it removes external noise from the image and gives a watershed marker of lungs and cancer cells. As we can see in the below figure watershed marker removes external noise and applies a binary mask on the image , black pixels in lungs represent cancer cells.
 
-(image_3)
+![](Images/4.PNG)
 
 For better segmentation we integrate sobel filter  with watershed algorithms .It removes the external layer of lungs. After removing the outer layer we use the internal marker and the Outline that was just created to generate the lungfilter using bitwise_or operations of numpy. It also removes the heart from CT scan images. Next step is to close off the lung filter with morphological operations and morphological gradients. It provides better segmented lungs than the previous process. We can see this process in the figure below.
 
-(image_4)
+![](Images/5.PNG)
 
 By doing this we in total generated 1002 images with related labels which includes almost 12 patients CT scan data in which there are almost the same number of cancer and non-cancer patients.
 
@@ -45,17 +45,19 @@ We tried three different models of Convolutional Neural Networks, which are base
 Our first model “Sequential_1” is the basic simple approach of using the convolution layers, flatten fully connected layers, max pooling and dropout in the middle layers, which performs significantly well on the number classification problem.
 Summary of model is given below:
 
-(image)
+![](Images/6.PNG)
 
 Second model “Sequential_2” is the Deep Convolutional Neural Network with Max Pooling and Fully connected layers in the end. This model with specified number of elements and layers performed best in many research papers with different datasets.
 Summary of model is given below:
 
-(image)
+![](Images/7.PNG)
+![](Images/8.PNG)
 
 Third and the last model approach was to use transfer learning on VGG-16 with some changes in the last three layers which are fully connected. This model gives appreciable results in object classification.
 Summary of model is given below:
 
-(image)
+![](Images/9.PNG)
+![](Images/10.PNG)
 
 Important Information regarding the training model:
 After making successful binary lung segmented masks, we train models on segmented lungs with a batch size of 32 for image data generator and using 100 images in each epoch for 30 epochs with exception of 500 images in each epoch for VGG-16. We are training images with the shape of (512,512,1) for the first two models and the shape of (512,512,3) for VGG-16. For a better result data augmentation is used to train models on different augmentation like shear range , zoom range , horizontal flip , rotation range , centre shift etc. For the end layer we used a single node for binary c;assification as we want to classify between cancer and non- cancer lungs.
@@ -64,39 +66,40 @@ Also we used the callbacks from tensorflow keras to save the best accuracy model
 # TRANSFER LEARNING : VGG16-NET
 VGG Net is the name of a pre-trained convolutional neural network (CNN) invented by Simonyan and Zisserman from Visual Geometry Group (VGG) at University of Oxford in 2014 and it was able to be the 1st runner-up of the ILSVRC (ImageNet Large Scale Visual Recognition Competition) 2014 in the classification task. VGG Net has been trained on ImageNet ILSVRC dataset which includes images of 1000 classes split into three sets of 1.3 million training images, 100,000 testing images and 50,000 validation images. The model obtained 92.7% test accuracy in ImageNet. VGG Net has been successful in many real world applications such as estimating the heart rate based on the body motion, and pavement distress detection .
 
-(image)
+![](Images/11.PNG)
 
 VGG Net has learned to extract the features (feature extractor) that can distinguish the objects and is used to classify unseen objects. VGG was invented with the purpose of enhancing classification accuracy by increasing the depth of the CNNs. VGG 16 and VGG 19, having 16 and 19 weight layers, respectively, have been used for object recognition. VGG Net takes input of 224×224 RGB images and passes them through a stack of convolutional layers with the fixed filter size of 3×3 and the stride of 1. There are five max pooling filters embedded between convolutional layers in order to down-sample the input representation (image, hidden-layer output matrix, etc.). The stack of convolutional layers are followed by 3 fully connected layers, having 4096, 4096 and 1000 channels, respectively. The last layer is a soft-max layer . Below figure shows VGG network structure.
 
 But in this approach we have images with the shape of (512,512) . so we build our own model using vgg16-net architecture. And compile the model with a powerful adam optimizer , learning rate is 0.0001 , entropy is binary_crossentropy and accuracy metrics. The  below  figure shows model summary , convolution layers, maxpooling layers and params.
 
-(image)
+![](Images/12.PNG)
+![](Images/13.PNG)
 
 # CONCLUSION AND RESULTS
 
 Following are the graphs of accuracy and loss from the three models used for classification in our project.
 Model: Sequential_1
 
-(image)
+![](Images/14.PNG)
 
-(image)
+![](Images/15.PNG)
 
 Model: Sequential_2
 
-(image)
+![](Images/16.PNG)
 
-(image)
+![](Images/17.PNG)
 
 Model: VGG_16
 
-(image)
+![](Images/18.PNG)
 
-(image)
+![](Images/19.PNG)
 
 Tabular Comparison of model training accuracy and loss and model validation accuracy and loss:
 Note: we are showing the best val. acc. related information in all models as the callbacks function will save only the best accuracy model.
 
-(table)
+![](Images/20.PNG)
 
 Results:
 From the Results shown adobe in graphs and the comparison table we can conclude the following things:
@@ -107,6 +110,6 @@ From the Results shown adobe in graphs and the comparison table we can conclude 
 
 Tabular comparison of the best accuracy model with some other models from from other research papers for binary classification:
 
-(table)
+![](Images/21.PNG)
 
-# Note:  There were also some challanges with the dataset which can be overcomed in the future verssion code.
+Note:  There were also some challanges with the dataset which can be overcomed in the future verssion code.
