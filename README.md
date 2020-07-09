@@ -13,7 +13,7 @@ The LUNA16 dataset  is a subset of LIDC-IDRI dataset, in which the heterogeneous
 Visualization of dataset is an important part of training , it gives better understanding of dataset. But CT scan images are hard to visualize for a normal pc or any window browser. Therefore we use the pydicom library to solve this problem. The Pydicom library gives an image array and metadata information stored in CT images like patient’s name,patient’s id, patient’s birth date,image position , image number , doctor’s name , doctor’s birth date etc.
  Luna16 dataset is a directory which contains many subdirectories named on patient’s ids. A complete subdirectory is 3d image of lungs which is stored in around 180 2d image slices according to their image number.
 
-(figure_1)
+![](Images/1.PNG)
 
 After combining all images in a single subdirectory according to their image it represents a 3d image. 3d image of lungs gives a vast idea about lung cancer cells  and other diseases in lungs . 
 
