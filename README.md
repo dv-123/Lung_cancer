@@ -153,7 +153,8 @@ From the Results shown adobe in graphs and the comparison table we can conclude 
 
 ![](Images/21.PNG)
 
-Note:  There were also some challanges with the dataset which can be overcomed in the future verssion code.
+Note: There were also some challanges with the dataset which can be overcomed in the future verssion code.
+Note: There were some updates in the codes which is updated in the newer version of the python notebook "lung_cancer.ipynb" and "Lungcancer_1.ipynb" which includes the code for lung cancer nodule detection and the older version also. This part of nodeule detection is not explained above. The link to the dataset for both the new and older python notebooks is given in the dataset folder.  
 
 <a name="CONTRIBUTORS"></a>
 # Contributors
